@@ -15,6 +15,9 @@ ENV APACHE_LOG_DIR /var/log/apache2
 RUN /usr/sbin/a2ensite default-ssl
 RUN /usr/sbin/a2enmod ssl
 
+RUN php /opt/ona-core/install/install.php --database_name=default --admin_passwd=my-secret-pw --database_host=mysql --admin_login=root --sys_login=ona_sys --sys_passwd=changeme --default_domain=example.com
+
+COPY database_settings.inc.php /opt/ona-core/etc/database_settings.inc.php
 COPY default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
 COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
